@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammatiktest: Konjunktiv II</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #c5cae9 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 { color: #1e3a8a; margin-bottom: 10px; }
+        .subtitle { color: #64748b; }
+        .exercise-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .exercise-header {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        .exercise-header:hover { background: #f8fafc; }
+        .exercise-title h2 { color: #1e3a8a; margin-bottom: 5px; }
+        .exercise-description { color: #64748b; }
+        .exercise-content { padding: 0 25px 25px 25px; display: none; }
+        .exercise-content.active { display: block; }
+        .tip-box {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .question-text { color: #1e293b; line-height: 1.8; }
+        .question-number {
+            font-weight: bold;
+            color: #475569;
+            margin-right: 10px;
+        }
+        input[type="text"] {
+            border: 2px solid #cbd5e1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        input.short { width: 120px; }
+        input.long { width: 100%; margin-top: 10px; }
+        input.correct { border-color: #22c55e; background: #f0fdf4; }
+        input.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .word-hint { color: #3b82f6; font-size: 14px; margin: 10px 0; }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .check-btn { background: #3b82f6; color: white; }
+        .check-btn:hover { background: #2563eb; }
+        .reset-btn { background: #22c55e; color: white; }
+        .reset-btn:hover { background: #16a34a; }
+        .score {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        .score-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-right: 10px;
+        }
+        .score-percent { color: #64748b; }
+        .chevron { font-size: 24px; color: #64748b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Grammatiktest</h1>
+            <p class="subtitle">Wähle eine Übung aus:</p>
+        </div>
+        
+        <div class="exercise-section">
+            <div class="exercise-header" onclick="toggleExercise(1)">
+                <div class="exercise-title">
+                    <h2>Übung 1: Konjunktiv II</h2>
+                    <p class="exercise-description">Ergänze die Verben haben, sein und werden</p>
+                </div>
+                <span class="chevron" id="chevron1">▲</span>
+            </div>
+            <div class="exercise-content active" id="exercise1">
+                <div class="tip-box">
+                    <strong>Tipp:</strong> sein → wäre | haben → hätte | werden → würde
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">1.</span>
+                    <span class="question-text">Ich <input type="text" class="short" id="q1_1" data-answer="würde"> gern in Spanien leben.</span>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">2.</span>
+                    <span class="question-text">Sie <input type="text" class="short" id="q1_2a" data-answer="wäre"> sehr stolz, wenn sie die Prüfung bestehen <input type="text" class="short" id="q1_2b" data-answer="würde">.</span>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">3.</span>
+                    <span class="question-text">Wir <input type="text" class="short" id="q1_3a" data-answer="hätten"> mehr Spaß, wenn das Wetter schöner <input type="text" class="short" id="q1_3b" data-answer="wäre">.</span>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">4.</span>
+                    <span class="question-text">Ich <input type="text" class="short" id="q1_4" data-answer="wäre"> jetzt lieber am Strand.</span>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">5.</span>
+                    <span class="question-text">Er <input type="text" class="short" id="q1_5a" data-answer="wäre"> glücklicher, wenn er weniger Stress <input type="text" class="short" id="q1_5b" data-answer="hätte">.</span>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">6.</span>
+                    <span class="question-text">Sie <input type="text" class="short" id="q1_6" data-answer="hätte"> gern bessere Noten in Mathe.</span>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">7.</span>
+                    <span class="question-text">Er <input type="text" class="short" id="q1_7" data-answer="würde"> dir sofort helfen, wenn du ihn fragst.</span>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">8.</span>
+                    <span class="question-text">Wir <input type="text" class="short" id="q1_8a" data-answer="würden"> öfter ins Kino gehen, wenn wir mehr Zeit <input type="text" class="short" id="q1_8b" data-answer="hätten">.</span>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">9.</span>
+                    <span class="question-text">Ich <input type="text" class="short" id="q1_9" data-answer="hätte"> gern ein größeres Zimmer.</span>
+                </div>
+                
+                <div class="buttons">
+                    <button class="check-btn" id="check1" onclick="checkExercise(1)">✓ Überprüfen</button>
+                    <div id="score1" style="display:none;">
+                        <span class="score"><span class="score-number" id="score1-text"></span><span class="score-percent" id="score1-percent"></span></span>
+                        <button class="reset-btn" onclick="resetExercise(1)">↻ Neu starten</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="exercise-section">
+            <div class="exercise-header" onclick="toggleExercise(2)">
+                <div class="exercise-title">
+                    <h2>Übung 2: Sätze mit "als ob"</h2>
+                    <p class="exercise-description">Bilde Nebensätze mit "als ob" + Konjunktiv II</p>
+                </div>
+                <span class="chevron" id="chevron2">▼</span>
+            </div>
+            <div class="exercise-content" id="exercise2">
+                <div class="tip-box">
+                    <strong>Tipp:</strong> Verwende "als ob" + Subjekt + ... + Verb im Konjunktiv II am Satzende
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">1.</span>
+                    <div class="question-text">Es scheint, ____________________________.</div>
+                    <div class="word-hint">(sie sehr – flüssig – sprechen)</div>
+                    <input type="text" class="long" id="q2_1" data-answers='["als ob sie sehr flüssig sprechen würde", "als ob sie sehr flüssig spräche", "als würde sie sehr flüssig sprechen"]'>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">2.</span>
+                    <div class="question-text">Es sieht so aus, ____________________________.</div>
+                    <div class="word-hint">(wir – gleich – anfangen)</div>
+                    <input type="text" class="long" id="q2_2" data-answers='["als ob wir gleich anfangen würden", "als würden wir gleich anfangen", "als ob wir gleich anfingen"]'>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">3.</span>
+                    <div class="question-text">Es scheint, ____________________________.</div>
+                    <div class="word-hint">(die beiden – lange Gespräche – führen)</div>
+                    <input type="text" class="long" id="q2_3" data-answers='["als ob die beiden lange gespräche führen würden", "als würden die beiden lange gespräche führen", "als ob die beiden lange gespräche führten"]'>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">4.</span>
+                    <div class="question-text">Es sieht so aus, ____________________________.</div>
+                    <div class="word-hint">(er – gerade – ein Foto – hochladen)</div>
+                    <input type="text" class="long" id="q2_4" data-answers='["als ob er gerade ein foto hochladen würde", "als würde er gerade ein foto hochladen", "als ob er gerade ein foto hochlüde"]'>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">5.</span>
+                    <div class="question-text">Der Vater sieht aus, ____________________________.</div>
+                    <div class="word-hint">(er – seine Kinder – immer – unterstützen)</div>
+                    <input type="text" class="long" id="q2_5" data-answers='["als ob er seine kinder immer unterstützen würde", "als würde er seine kinder immer unterstützen", "als ob er seine kinder immer unterstützte"]'>
+                </div>
+                
+                <div class="question">
+                    <span class="question-number">6.</span>
+                    <div class="question-text">Es sieht so aus, ____________________________.</div>
+                    <div class="word-hint">(sie – dir – etwas Spannendes – erzählen)</div>
+                    <input type="text" class="long" id="q2_6" data-answers='["als ob sie dir etwas spannendes erzählen würde", "als würde sie dir etwas spannendes erzählen", "als ob sie dir etwas spannendes erzählte"]'>
+                </div>
+                
+                <div class="buttons">
+                    <button class="check-btn" id="check2" onclick="checkExercise(2)">✓ Überprüfen</button>
+                    <div id="score2" style="display:none;">
+                        <span class="score"><span class="score-number" id="score2-text"></span><span class="score-percent" id="score2-percent"></span></span>
+                        <button class="reset-btn" onclick="resetExercise(2)">↻ Neu starten</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let checked = {1: false, 2: false};
+        
+        function toggleExercise(num) {
+            const content = document.getElementById('exercise' + num);
+            const chevron = document.getElementById('chevron' + num);
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                chevron.textContent = '▼';
+            } else {
+                content.classList.add('active');
+                chevron.textContent = '▲';
+            }
+        }
+        
+        function checkExercise(num) {
+            if (num === 1) checkExercise1();
+            else checkExercise2();
+        }
+        
+        function checkExercise1() {
+            checked[1] = true;
+            const inputs = document.querySelectorAll('#exercise1 input[type="text"]');
+            let correct = 0, total = inputs.length;
+            
+            inputs.forEach(input => {
+                const answer = input.getAttribute('data-answer').toLowerCase();
+                const userAnswer = input.value.trim().toLowerCase();
+                if (userAnswer === answer) {
+                    input.classList.add('correct');
+                    input.classList.remove('incorrect');
+                    correct++;
+                } else {
+                    input.classList.add('incorrect');
+                    input.classList.remove('correct');
+                }
+                input.disabled = true;
+            });
+            
+            document.getElementById('check1').style.display = 'none';
+            document.getElementById('score1').style.display = 'flex';
+            document.getElementById('score1').style.gap = '15px';
+            document.getElementById('score1-text').textContent = correct + ' / ' + total;
+            document.getElementById('score1-percent').textContent = '(' + Math.round((correct/total)*100) + '%)';
+        }
+        
+        function checkExercise2() {
+            checked[2] = true;
+            const inputs = document.querySelectorAll('#exercise2 input[type="text"]');
+            let correct = 0, total = inputs.length;
+            
+            inputs.forEach(input => {
+                const answers = JSON.parse(input.getAttribute('data-answers'));
+                const userAnswer = input.value.trim().toLowerCase();
+                if (answers.includes(userAnswer)) {
+                    input.classList.add('correct');
+                    input.classList.remove('incorrect');
+                    correct++;
+                } else {
+                    input.classList.add('incorrect');
+                    input.classList.remove('correct');
+                }
+                input.disabled = true;
+            });
+            
+            document.getElementById('check2').style.display = 'none';
+            document.getElementById('score2').style.display = 'flex';
+            document.getElementById('score2').style.gap = '15px';
+            document.getElementById('score2-text').textContent = correct + ' / ' + total;
+            document.getElementById('score2-percent').textContent = '(' + Math.round((correct/total)*100) + '%)';
+        }
+        
+        function resetExercise(num) {
+            checked[num] = false;
+            const inputs = document.querySelectorAll('#exercise' + num + ' input[type="text"]');
+            inputs.forEach(input => {
+                input.value = '';
+                input.disabled = false;
+                input.classList.remove('correct', 'incorrect');
+            });
+            document.getElementById('check' + num).style.display = 'inline-block';
+            document.getElementById('score' + num).style.display = 'none';
+        }
+    </script>
+</body>
+</html>
